@@ -84,8 +84,13 @@ namespace Nop.Core.Caching
         /// </summary>
         public virtual void Clear()
         {
+            //send cancellation request
             _cancellationTokenSource.Cancel();
+
+            //releases all resources used by this cancellation token
             _cancellationTokenSource.Dispose();
+
+            //recreate cancellation token
             _cancellationTokenSource = new CancellationTokenSource();
         }
 
